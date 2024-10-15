@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotify Downloader</title>
-    <style>
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Spotify Downloader</title> 
+  <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0; /* Remove default margin */
@@ -139,78 +139,33 @@
             transform: translateX(-50%); /* Adjust for width of the circle */
             width: 150px; /* Circle diameter */
             height: 150px; /* Circle diameter */
-            background-image: url('https://i.ibb.co/5G92Kk6/IMG-20241015-090218.jpg'); /* Placeholder image */
-            background-size: cover; /* Cover the circle with the image */
-            background-position: center; /* Center the image */
+            background-color: rgba(255, 255, 255, 0.2); /* Light transparent background */
             border-radius: 50%; /* Makes the div circular */
             border: 5px solid rgba(255, 255, 255, 0.5); /* Light border for the circle */
-            box-shadow: 0 0 15px white, 0 0 30px white; /* Glowing effect */
-        }
-
-        .time-display, .date-display {
-            position: absolute; /* Position it relative to the body */
-            left: 50%; /* Center horizontally */
-            transform: translateX(-50%); /* Adjust for centering */
-            font-size: 16px; /* Normal font size */
-            text-align: center; /* Center the text */
-            color: white; /* Default text color */
-            transition: color 1s; /* Smooth color transition */
-            border: 2px solid rgba(255, 255, 255, 0.7); /* Add border */
-            border-radius: 4px; /* Rounded corners for border */
-            padding: 5px; /* Padding for the border */
-            background-color: rgba (0, 0, 0, 0.5); /* Background for better visibility */
-            box-shadow: 0 0 10px white, 0 0 20px white; /* Glowing effect */
-        }
-
-        .date-display {
-            bottom: 210px; /* Place above the time */
-        }
-
-        .time-display {
-            bottom: 180px; /* Place above the circle */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Soft shadow */
         }
 
         /* Ensuring the loading text is hidden by default */
         #loading {
             display: none; /* Initially hidden */
         }
-
-        /* Hide audio controls */
-        audio {
-            display: none; /* Hide the audio player */
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Spotify DL</h1>
-        <p>Enter a Spotify link below:</p>
-
-        <div class="input-border">
-            <input type="text" id="spotifyLink" placeholder="Enter Spotify song link here" />
-        </div>
-        <button onclick="downloadMusic()">Download</button>
-        
-        <p id="loading">Please wait...</p>
-
-        <div id="result">
-            <a id="downloadLink" href="#" download>Download Your Song</a>
-            <img id="trackImage" src="#" alt="Track Image">
-            <p id="trackInfo"></p>
-        </div>
-    </div>
-
-    <div class="date-display" id="dateDisplay">Date: 01/01/1970</div> <!-- Date display -->
-    <div class="time-display" id="timeDisplay">Time Now: 00:00:00</div> <!-- Time display -->
-    <div class="circle" id="circle"></div> <!-- Big circle at the bottom center -->
-
-    <!-- Audio element to play MP3 -->
-    <audio id="backgroundAudio" autoplay loop>
-        <source src="your-audio-file.mp3" type="audio/mpeg"> <!-- Replace with your MP3 file -->
-        Your browser does not support the audio element.
-    </audio>
-
-    <script>
+    </style> 
+ </head> 
+ <body> 
+  <div class="container"> 
+   <h1>Spotify DL</h1> 
+   <p>Enter a Spotify link below:</p> 
+   <div class="input-border"> 
+    <input type="text" id="spotifyLink" placeholder="Enter Spotify song link here"> 
+   </div> <button onclick="downloadMusic()">Download</button> 
+   <p id="loading">Please wait...</p> 
+   <div id="result"> <a id="downloadLink" href="#" download>Download Your Song</a> 
+    <img id="trackImage" src="#" alt="Track Image"> 
+    <p id="trackInfo"></p> 
+   </div> 
+  </div> 
+  <div class="circle"></div> <!-- Big circle at the bottom center --> 
+  <script>
         async function downloadMusic() {
             const spotifyLink = document.getElementById('spotifyLink').value;
             const apiUrl = `https://deku-rest-apis.ooguy.com/api/spotify2?q=${encodeURIComponent(spotifyLink)}`;
@@ -254,30 +209,6 @@
                 document.getElementById('loading').style.display = 'none';
             }
         }
-
-        function updateDateAndTime() {
-            const now = new Date();
-            const dateString = now.toLocaleDateString(); // Format: MM/DD/YYYY
-            const timeString = now.toLocaleTimeString();
-            const timeDisplay = document.getElementById('timeDisplay');
-            const dateDisplay = document.getElementById('dateDisplay');
-            timeDisplay.innerText = `Time: ${timeString}`;
-            dateDisplay.innerText = `Date: ${dateString}`;
-            
-            // Change color based on seconds
-            const seconds = now.getSeconds();
-            const color = `hsl(${seconds * 6}, 100%, 50%)`; // Hue change
-            timeDisplay.style.color = color;
-            dateDisplay.style.color = color;
-        }
-
-        // Update date and time every second
-        setInterval(updateDateAndTime, 1000);
-        updateDateAndTime(); // Initial call to display date and time immediately
-
-               <audio id="sound" controls autoplay src="Kinikilig.mp3"></audio>
-            });
-        };
-    </script>
-</body>
+    </script> 
+ </body>
 </html>
