@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Downloader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0; /* Remove default margin */
+            height: 100vh; /* Full height for the body */
+            background: linear-gradient(135deg, cyan, black); /* Gradient background */
+            color: white; /* Set text color to white for contrast */
+            display: flex; /* Use flexbox for centering */
+            flex-direction: column; /* Stack children vertically */
+            justify-content: flex-start; /* Start from the top */
+            align-items: center; /* Center items horizontally */
+            position: relative; /* Position relative for circle positioning */
+            padding-top: 20px; /* Padding to move the content down slightly */
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 20px; /* Padding around the container */
+            border-radius: 10px; /* Rounded corners for the container */
+            position: relative; /* Position relative for pseudo-elements */
+            overflow: hidden; /* Hide overflow from pseudo-element */
+            text-align: center; /* Center align text inside container */
+            border: 10px solid transparent; /* Base border */
+            animation: rainbow-border 5s linear infinite; /* Running rainbow border animation */
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for the container */
+            z-index: 1; /* Ensure container is above circle */
+            margin-bottom: 20px; /* Space below the container */
+        }
+
+        @keyframes rainbow-border {
+            0% {
+                border-color: red;
+            }
+            14% {
+                border-color: orange;
+            }
+            28% {
+                border-color: yellow;
+            }
+            42% {
+                border-color: green;
+            }
+            57% {
+                border-color: blue;
+            }
+            71% {
+                border-color: indigo;
+            }
+            85% {
+                border-color: violet;
+            }
+            100% {
+                border-color: red;
+            }
+        }
+
+        .input-border {
+            display: inline-block; /* Make it inline-block for centering */
+            position: relative; /* Position relative for pseudo-element */
+            border: 2px solid #007bff; /* Border for input field */
+            border-radius: 4px; /* Rounded corners for input field */
+            overflow: hidden; /* Prevent overflow */
+            margin-bottom: 10px; /* Space below the input field */
+        }
+
+        input[type="text"] {
+            width: 100%; /* Make the input field fill its parent */
+            padding: 10px; /* Padding inside the input */
+            font-size: 16px; /* Font size for input text */
+            margin: 0; /* No margin to keep it snug */
+            border: none; /* Remove default border */
+            background-color: #fff; /* Background color for input field */
+            outline: none; /* Remove outline on focus */
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+
+        button {
+            padding: 10px 20px; /* Adjusted padding for a better fit */
+            font-size: 16px;
+            cursor: pointer;
+            border: 2px solid #007bff; /* Border for button */
+            background-color: #007bff; /* Button background color */
+            color: white; /* Button text color */
+            border-radius: 25px; /* Rounded corners for button */
+            margin: 0 auto; /* Center the button */
+            display: block; /* Display as block to center */
+            transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for hover effect */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Button hover color */
+            border-color: #0056b3; /* Border color on hover */
+        }
+
+        #downloadLink {
+            display: none;
+            margin-top: 20px;
+            padding: 10px; /* Padding for download link */
+            border: 1px solid #ccc; /* Border for download link */
+            border-radius: 4px; /* Rounded corners for download link */
+            text-align: center; /* Center text in download link */
+            display: block; /* Make it a block element */
+            background-color: #007bff; /* Background color for download link */
+            color: white; /* Text color for download link */
+            text-decoration: none; /* Remove underline from the link */
+        }
+
+        #downloadLink:hover {
+            background-color: #0056b3; /* Hover background color */
+        }
+
+        img {
+            margin-top: 20px;
+            width: 200px;
+            height: 200px;
+            border: 2px solid #ccc; /* Border for image */
+            border-radius: 4px; /* Rounded corners for image */
+            display: none; /* Initially hidden */
+        }
+
+        #trackInfo {
+            border: 1px solid #ccc; /* Border for track info */
+            padding: 10px; /* Padding for track info */
+            margin-top: 10px; /* Margin above track info */
+            border-radius: 4px; /* Rounded corners for track info */
+        }
+
+        /* Circle styles */
+        .circle {
+            position: absolute; /* Position absolutely to the bottom center */
+            bottom: 20px; /* Align at the bottom */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Adjust for width of the circle */
+            width: 150px; /* Circle diameter */
+            height: 150px; /* Circle diameter */
+            background-image: url('https://i.ibb.co/5G92Kk6/IMG-20241015-090218.jpg'); /* Placeholder image */
+            background-size: cover; /* Cover the circle with the image */
+            background-position: center; /* Center the image */
+            border-radius: 50%; /* Makes the div circular */
+            border: 5px solid rgba(255, 255, 255, 0.5); /* Light border for the circle */
+            box-shadow: 0 0 15px white, 0 0 30px white; /* Glowing effect */
+        }
+
+        .time-display, .date-display {
+            position: absolute; /* Position it relative to the body */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Adjust for centering */
+            font-size: 16px; /* Normal font size */
+            text-align: center; /* Center the text */
+            color: white; /* Default text color */
+            transition: color 1s; /* Smooth color transition */
+            border: 2px solid rgba(255, 255, 255, 0.7); /* Add border */
+            border-radius: 4px; /* Rounded corners for border */
+            padding: 5px; /* Padding for the border */
+            background-color: rgba (0, 0, 0, 0.5); /* Background for better visibility */
+            box-shadow: 0 0 10px white, 0 0 20px white; /* Glowing effect */
+        }
+
+        .date-display {
+            bottom: 210px; /* Place above the time */
+        }
+
+        .time-display {
+            bottom: 180px; /* Place above the circle */
+        }
+
+        /* Ensuring the loading text is hidden by default */
+        #loading {
+            display: none; /* Initially hidden */
+        }
+
+        /* Hide audio controls */
+        audio {
+            display: none; /* Hide the audio player */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Spotify DL</h1>
+        <p>Enter a Spotify link below:</p>
+
+        <div class="input-border">
+            <input type="text" id="spotifyLink" placeholder="Enter Spotify song link here" />
+        </div>
+        <button onclick="downloadMusic()">Download</button>
+        
+        <p id="loading">Please wait...</p>
+
+        <div id="result">
+            <a id="downloadLink" href="#" download>Download Your Song</a>
+            <img id="trackImage" src="#" alt="Track Image">
+            <p id="trackInfo"></p>
+        </div>
+    </div>
+
+    <div class="date-display" id="dateDisplay">Date: 01/01/1970</div> <!-- Date display -->
+    <div class="time-display" id="timeDisplay">Time Now: 00:00:00</div> <!-- Time display -->
+    <div class="circle" id="circle"></div> <!-- Big circle at the bottom center -->
+
+    <!-- Audio element to play MP3 -->
+    <audio id="backgroundAudio" autoplay loop>
+        <source src="your-audio-file.mp3" type="audio/mpeg"> <!-- Replace with your MP3 file -->
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        async function downloadMusic() {
+            const spotifyLink = document.getElementById('spotifyLink').value;
+            const apiUrl = `https://deku-rest-apis.ooguy.com/api/spotify2?q=${encodeURIComponent(spotifyLink)}`;
+
+            // Show loading message
+            document.getElementById('loading').style.display = 'block';
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                // Hide loading message
+                document.getElementById('loading').style.display = 'none';
+
+                // Check if the API returned the correct result and download URL
+                if (data && data.result && data.result.download_url) {
+                    const downloadLink = document.getElementById('downloadLink');
+                    const trackImage = document.getElementById('trackImage');
+                    const trackInfo = document.getElementById('trackInfo');
+                    
+                    // Set the download link and make it visible
+                    downloadLink.href = data.result.download_url;
+                    downloadLink.style.display = 'block';
+                    downloadLink.innerText = `Download: ${data.result.title}`;
+
+                    // Display the track image
+                    trackImage.src = data.result.image;
+                    trackImage.style.display = 'block';
+
+                    // Display additional track information
+                    trackInfo.innerText = `Title: ${data.result.title}\nArtist: ${data.result.artist}\nDuration: ${Math.floor(data.result.duration / 60000)}m ${Math.floor((data.result.duration % 60000) / 1000)}s`;
+
+                } else {
+                    alert('Error: Could not retrieve the download link.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while fetching the music.');
+                
+                // Hide loading message on error
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        function updateDateAndTime() {
+            const now = new Date();
+            const dateString = now.toLocaleDateString(); // Format: MM/DD/YYYY
+            const timeString = now.toLocaleTimeString();
+            const timeDisplay = document.getElementById('timeDisplay');
+            const dateDisplay = document.getElementById('dateDisplay');
+            timeDisplay.innerText = `Time: ${timeString}`;
+            dateDisplay.innerText = `Date: ${dateString}`;
+            
+            // Change color based on seconds
+            const seconds = now.getSeconds();
+            const color = `hsl(${seconds * 6}, 100%, 50%)`; // Hue change
+            timeDisplay.style.color = color;
+            dateDisplay.style.color = color;
+        }
+
+        // Update date and time every second
+        setInterval(updateDateAndTime, 1000);
+        updateDateAndTime(); // Initial call to display date and time immediately
+
+        // Play audio on load
+        window.onload = function() {
+            const audio = document.getElementById('backgroundAudio');
+            audio.play().catch(error => {
+                console.error('Audio play error:', error);
+            });
+        };
+    </script>
+</body>
+</html>
