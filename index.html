@@ -275,11 +275,7 @@
         setInterval(updateDateAndTime, 1000);
         updateDateAndTime(); // Initial call to display date and time immediately
 
-        // Play audio on load
-        window.onload = function() {
-            const audio = document.getElementById('backgroundAudio');
-            audio.play().catch(error => {
-                console.error('Audio play error:', error);
+               <audio id="sound" controls autoplay src="Kinikilig.mp3"></audio>
             });
         };
     </script>
