@@ -1,0 +1,1 @@
+chrome-extension://bghmfoakiidiedpheejcjhciekobjcjp/public/build/api-monitor-cs-isolated.js

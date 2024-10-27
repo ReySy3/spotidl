@@ -1,0 +1,1 @@
+chrome-extension://ofncgcgajhgnbkbmkdhbgkoopfbemhfj/js/content/views/recommended_panel_column_view.js

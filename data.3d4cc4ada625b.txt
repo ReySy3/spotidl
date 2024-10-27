@@ -1,0 +1,1 @@
+chrome-extension://ofncgcgajhgnbkbmkdhbgkoopfbemhfj/js/content/views/selected_dom_view.js

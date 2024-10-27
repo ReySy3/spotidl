@@ -1,0 +1,1 @@
+chrome-extension://ofncgcgajhgnbkbmkdhbgkoopfbemhfj/js/content/templates/community_icon.hbs.precompiled.js

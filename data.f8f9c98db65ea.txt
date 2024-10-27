@@ -1,0 +1,1 @@
+chrome-extension://ofncgcgajhgnbkbmkdhbgkoopfbemhfj/js/content/views/column_view.js

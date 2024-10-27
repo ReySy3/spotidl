@@ -1,0 +1,1 @@
+chrome-extension://ofncgcgajhgnbkbmkdhbgkoopfbemhfj/js/content/views/listing_detector.js

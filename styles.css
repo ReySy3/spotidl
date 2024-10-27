@@ -1,0 +1,355 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #191414;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.container {
+    background-color: rgba(29, 185, 84, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(10px);
+    max-width: 400px;
+    width: calc(100% - 40px);
+    margin: 20px auto;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    color: #1DB954;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+#logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+input[type="text"] {
+    width: calc(100% - 40px);
+    padding: 10px;
+    margin: 0 auto 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #282828;
+    color: #fff;
+    font-size: 1rem;
+    display: block;
+}
+
+button {
+    background-color: #1DB954;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #1ed760;
+    transform: scale(1.05);
+}
+
+#result {
+    margin-top: 20px;
+    display: none;
+    animation: fadeIn 0.5s ease-out;
+}
+
+#albumArt {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.loading {
+    display: none;
+    margin-top: 20px;
+}
+
+.loading::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 4px solid #1DB954;
+    border-color: #1DB954 transparent #1DB954 transparent;
+    animation: loading 1.2s linear infinite;
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#downloadProgress {
+    width: 100%;
+    background-color: #282828;
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+    display: none;
+}
+
+#progressBar {
+    width: 0%;
+    height: 10px;
+    background-color: #1DB954;
+    transition: width 0.3s ease-out;
+}
+
+footer {
+    background-color: rgba(29, 185, 84, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 10px 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #1DB954;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #1ed760;
+}
+
+.audio-player {
+    background-color: #282828;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.audio-player .controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.audio-player button {
+    background-color: transparent;
+    border: none;
+    color: #1DB954;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.audio-player {
+    /*button:hover*/
+    color: #1ed760;
+}
+
+.audio-player .progress-container {
+    background-color: #535353;
+    height: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.audio-player .progress-bar {
+    background-color: #1DB954;
+    height: 100%;
+    border-radius: 5px;
+    width: 0;
+    position: relative;
+}
+
+.audio-player .progress-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, #1DB954, transparent);
+    animation: progressLine 2s linear infinite;
+}
+
+.audio-player .progress-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background-color: #fff;
+    transform: translateX(-50%);
+}
+
+@keyframes progressLine {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.audio-player .time {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #b3b3b3;
+    margin-top: 5px;
+}
+
+.audio-player .volume-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.audio-player .volume-slider {
+    width: 100px;
+    height: 5px;
+    -webkit-appearance: none;
+    background: #535353;
+    outline: none;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.audio-player .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #1DB954;
+    cursor: pointer;
+}
+
+.audio-player .volume-slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #1DB954;
+    cursor: pointer;
+}
+
+.audio-player .download-btn {
+    background-color: #1DB954;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 0.9rem;
+    margin-top: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+.audio-player .download-btn:hover {
+    background-color: #1ed760;
+    transform: scale(1.05);
+}
+
+@media (max-width: 480px) {
+    .audio-player .volume-slider {
+        width: 60px;
+    }
+    .audio-player .download-btn {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+    #logo {
+        width: 80px;
+        height: 80px;
+    }
+    input[type="text"],
+    button {
+        font-size: 0.9rem;
+    }
+    #albumArt {
+        width: 150px;
+        height: 150px;
+    }
+    .audio-player .volume-slider {
+        width: 60px;
+    }
+}
